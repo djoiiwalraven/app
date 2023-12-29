@@ -18,7 +18,6 @@ class App():
         self.genre_inputs = dict([(x.replace('Genre_',''),x) for x in self.model.features if 'Genre_' in x])
         self.venue_inputs = dict([(x.replace('Venue_',''),x) for x in self.model.features if 'Venue_' in x])
         self.postype_inputs = dict([(x.replace('PostType_',''),x) for x in self.model.features if 'PostType_' in x])
-        #self.platform_inputs = [(x, x-'Genre_') for x in self.model.features if x == 'INSTA' or x == 'FB']
         self.artist_inputs = dict([(x.replace('Artist_',''),x) for x in self.model.features if 'Artist_' in x])
         self.merged_df = None
         self.inputs = {
@@ -33,7 +32,6 @@ class App():
         self.progress_bar.progress(i)
 
     def model_prediction(self,model,inputs):
-        print(self.inputs)
         if any(v is None for v in self.inputs.values()):
             self.merged_df = None
             return False
