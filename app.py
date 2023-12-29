@@ -2,12 +2,13 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import pickle
-from io import BytesIO
-import altair as alt
 import datetime
+from io import BytesIO
+
+import altair as alt
+
 from model_container import ModelContainer
 import date_formater as dtf
-
 import bar_chart as bc
 
 class App():

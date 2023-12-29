@@ -1,5 +1,4 @@
 import pandas as pd
-import seaborn as sns
 import numpy as np
 import date_formater as dtf
 import altair as alt
@@ -11,7 +10,6 @@ def bar_plot(df,ids='Dates',values=['FB','INSTA'],platform='Facebook'):
 
     domain = ["FB", "INSTA"]
     range_ = ['#1877F2','#E95950']
-    #range_ = ['navyblue','firebrick']
 
     chart = alt.Chart(
         prediction_table,
