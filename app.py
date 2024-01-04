@@ -62,7 +62,6 @@ class App():
         #self.draw()
 
     def bar_charts(self):
-        #st.header('Theater de Veste')
         #st.header('Social Media Timing Optimization')
 
         chart_fb = bc.bar_plot(self.merged_df[ self.merged_df['PredFB'].isin([max(self.merged_df['PredFB']),min(self.merged_df['PredFB'])]) ],platform='Facebook')
@@ -89,7 +88,6 @@ class App():
 
     def draw(self):
         with st.sidebar:
-            st.header('Theater De Vest')
             st.header('Social Media Marketing Predictions')
             st.title('')
 
