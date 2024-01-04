@@ -27,6 +27,7 @@ class App():
             'post-type': None,
             'event-date': None
         }
+        self.capacity = None
 
     def update_progress(self,i):
         self.progress_bar.progress(i)
@@ -62,10 +63,16 @@ class App():
         #self.draw()
 
     def bar_charts(self):
-        #st.header('Social Media Timing Optimization')
+        # FIX DUPLICATES
+        fb_max_min = self.merged_df[self.merged_df['PredFB'].isin([max(self.merged_df['PredFB']),min(self.merged_df['PredFB'])])]
+        fb_max_min = fb_max_min.drop_duplicates(subset=['PredFB'],keep='first')
 
-        chart_fb = bc.bar_plot(self.merged_df[ self.merged_df['PredFB'].isin([max(self.merged_df['PredFB']),min(self.merged_df['PredFB'])]) ],platform='Facebook')
-        chart_insta = bc.bar_plot(self.merged_df[ self.merged_df['PredINSTA'].isin([max(self.merged_df['PredINSTA']),min(self.merged_df['PredINSTA'])]) ],platform='Instagram')
+
+        insta_max_min = self.merged_df[ self.merged_df['PredINSTA'].isin([max(self.merged_df['PredINSTA']),min(self.merged_df['PredINSTA'])]) ]
+        insta_max_min = insta_max_min.drop_duplicates(subset=['PredINSTA'],keep='first')
+
+        chart_fb = bc.bar_plot(fb_max_min,self.capacity,platform='Facebook')
+        chart_insta = bc.bar_plot(insta_max_min,self.capacity,platform='Instagram')
 
         #min_chart_fb = bc.bar_plot(self.merged_df[self.merged_df['PredFB'] == min(self.merged_df['PredFB'])],platform='Facebook')
         #min_chart_insta = bc.bar_plot(self.merged_df[self.merged_df['PredINSTA'] == max(self.merged_df['PredINSTA'])],platform='Instagram')
@@ -77,20 +84,16 @@ class App():
             chart_insta
         self.progress_bar.empty()
 
-    def set_inputs(self,a,b,c,d,e):
-        print('hello')
-        self.inputs['artist'] = a
-        self.inputs['genre'] = b
-        self.inputs['venue'] = c
-        self.inputs['post-type'] = d
-        self.inputs['event-date'] = e
-        #self.model_prediction(self.model,self.inputs)
+    def val_changed(self):
+        print('val change')
+        print(self.capacity)
 
     def draw(self):
         with st.sidebar:
-            st.header('Social Media Marketing Predictions')
+            st.header('Social Media Marketing Optimalisatie')
             st.title('')
 
+            self.capacity = st.number_input("Capaciteit:", value=0, placeholder=0, step=1)
             self.inputs['artist'] = self.artist_inputs[st.selectbox('Gezelschap: ',self.artist_inputs.keys())] 
             self.inputs['genre'] = self.genre_inputs[st.selectbox('Genre: ',self.genre_inputs.keys())]
             self.inputs['venue'] = self.venue_inputs[st.selectbox('Zaal: ',self.venue_inputs.keys())]

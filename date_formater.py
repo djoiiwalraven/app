@@ -40,5 +40,8 @@ def create_date_inputs(publish_date,event_date):
     hour = get_hour_of_day(publish_date)
     return days_b4_event, month, week_day, hour
 
+def to_time(row):
+    return f"{str(row.hour)}:{str(row.minute)}"
+    
 def to_str(row):
-    return f'{str(row.day)}-{str(row.month)}-{str(row.year)} h:{str(row.hour)}' 
+    return f"{str(row.day)}-{str(row.month)}-{str(row.year)}={str(row.hour)}:{str(row.minute)}"
