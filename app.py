@@ -16,7 +16,7 @@ class App():
         self.model = ModelContainer()
         self.model.load_model(model='exports/models/model1.pkl',features='exports/models/features1.csv')
         self.genre_inputs = dict([(x.replace('Genre_',''),x) for x in self.model.features if 'Genre_' in x])
-        self.venue_inputs = dict([(x.replace('Venue_',''),x) for x in self.model.features if 'Venue_' in x])
+        self.venue_inputs = dict([(x.replace('Venue_','').replace(' Theater de Vest',''),x) for x in self.model.features if 'Venue_' in x])
         self.postype_inputs = dict([(x.replace('PostType_',''),x) for x in self.model.features if 'PostType_' in x])
         self.artist_inputs = dict([(x.replace('Artist_',''),x) for x in self.model.features if 'Artist_' in x])
         self.merged_df = None
